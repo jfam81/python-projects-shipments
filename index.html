@@ -1,0 +1,125 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1500px;
+            height: 1500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "darkred", "id": "THLCH", "label": "THLCH", "shape": "dot"}, {"color": "darkred", "id": "ESZJU", "label": "ESZJU", "shape": "dot"}, {"color": "darkred", "id": "CNYTN", "label": "CNYTN", "shape": "dot"}, {"color": "darkred", "id": "THLKR", "label": "THLKR", "shape": "dot"}, {"color": "darkred", "id": "IDJKT", "label": "IDJKT", "shape": "dot"}, {"color": "darkred", "id": "BEANR", "label": "BEANR", "shape": "dot"}, {"color": "darkred", "id": "AEJEA", "label": "AEJEA", "shape": "dot"}, {"color": "darkred", "id": "BRSSZ", "label": "BRSSZ", "shape": "dot"}, {"color": "darkred", "id": "ESGRO", "label": "ESGRO", "shape": "dot"}, {"color": "darkred", "id": "MYPKG", "label": "MYPKG", "shape": "dot"}, {"color": "darkred", "id": "PFPPT", "label": "PFPPT", "shape": "dot"}, {"color": "darkred", "id": "NLRTM", "label": "NLRTM", "shape": "dot"}, {"color": "darkred", "id": "INNSA", "label": "INNSA", "shape": "dot"}, {"color": "darkred", "id": "USMIA", "label": "USMIA", "shape": "dot"}, {"color": "darkred", "id": "KWSAA", "label": "KWSAA", "shape": "dot"}, {"color": "darkred", "id": "ESBCN", "label": "ESBCN", "shape": "dot"}, {"color": "darkred", "id": "MXVER", "label": "MXVER", "shape": "dot"}, {"color": "orange", "id": "ESILL", "label": "ESILL", "shape": "dot"}, {"color": "orange", "id": "THBKK", "label": "THBKK", "shape": "dot"}, {"color": "orange", "id": "CMDLA", "label": "CMDLA", "shape": "dot"}, {"color": "orange", "id": "CNTAO", "label": "CNTAO", "shape": "dot"}, {"color": "orange", "id": "CNSHA", "label": "CNSHA", "shape": "dot"}, {"color": "orange", "id": "ECGYE", "label": "ECGYE", "shape": "dot"}, {"color": "orange", "id": "DEHAM", "label": "DEHAM", "shape": "dot"}, {"color": "orange", "id": "FRFOS", "label": "FRFOS", "shape": "dot"}, {"color": "orange", "id": "INIXE", "label": "INIXE", "shape": "dot"}, {"color": "orange", "id": "SGKEP", "label": "SGKEP", "shape": "dot"}, {"color": "orange", "id": "GRPIR", "label": "GRPIR", "shape": "dot"}, {"color": "orange", "id": "CNNGB", "label": "CNNGB", "shape": "dot"}, {"color": "orange", "id": "AUSYD", "label": "AUSYD", "shape": "dot"}, {"color": "orange", "id": "USPHL", "label": "USPHL", "shape": "dot"}, {"color": "orange", "id": "KRPUS", "label": "KRPUS", "shape": "dot"}, {"color": "orange", "id": "OMSOH", "label": "OMSOH", "shape": "dot"}, {"color": "orange", "id": "TRIST", "label": "TRIST", "shape": "dot"}, {"color": "orange", "id": "EGPSE", "label": "EGPSE", "shape": "dot"}, {"color": "darkblue", "id": "ITRPP", "label": "ITRPP", "shape": "dot"}, {"color": "darkblue", "id": "EGALY", "label": "EGALY", "shape": "dot"}, {"color": "darkblue", "id": "USNYC", "label": "USNYC", "shape": "dot"}, {"color": "darkblue", "id": "NOAAA", "label": "NOAAA", "shape": "dot"}, {"color": "darkblue", "id": "MMRGN", "label": "MMRGN", "shape": "dot"}, {"color": "darkblue", "id": "ITGOA", "label": "ITGOA", "shape": "dot"}, {"color": "darkblue", "id": "PHMNL", "label": "PHMNL", "shape": "dot"}, {"color": "darkblue", "id": "PTLEI", "label": "PTLEI", "shape": "dot"}, {"color": "darkblue", "id": "MACAS", "label": "MACAS", "shape": "dot"}, {"color": "darkblue", "id": "USOAK", "label": "USOAK", "shape": "dot"}, {"color": "darkblue", "id": "MYSHA", "label": "MYSHA", "shape": "dot"}, {"color": "darkblue", "id": "ESVLC", "label": "ESVLC", "shape": "dot"}, {"color": "darkblue", "id": "ITSIB", "label": "ITSIB", "shape": "dot"}, {"color": "darkblue", "id": "KEMBA", "label": "KEMBA", "shape": "dot"}, {"color": "darkblue", "id": "VNSGN", "label": "VNSGN", "shape": "dot"}, {"color": "darkblue", "id": "CIABJ", "label": "CIABJ", "shape": "dot"}, {"color": "darkblue", "id": "ITRAN", "label": "ITRAN", "shape": "dot"}, {"color": "darkblue", "id": "HKHKG", "label": "HKHKG", "shape": "dot"}, {"color": "darkblue", "id": "EGPSD", "label": "EGPSD", "shape": "dot"}, {"color": "darkblue", "id": "BDCGP", "label": "BDCGP", "shape": "dot"}, {"color": "darkblue", "id": "ITADO", "label": "ITADO", "shape": "dot"}, {"color": "darkblue", "id": "MYPGU", "label": "MYPGU", "shape": "dot"}, {"color": "darkblue", "id": "DJJIB", "label": "DJJIB", "shape": "dot"}, {"color": "darkblue", "id": "GTPBR", "label": "GTPBR", "shape": "dot"}, {"color": "darkblue", "id": "PHBTG", "label": "PHBTG", "shape": "dot"}, {"color": "darkblue", "id": "HNPCR", "label": "HNPCR", "shape": "dot"}, {"color": "darkblue", "id": "CAVAN", "label": "CAVAN", "shape": "dot"}, {"color": "darkblue", "id": "USLGB", "label": "USLGB", "shape": "dot"}, {"color": "darkblue", "id": "USLAX", "label": "USLAX", "shape": "dot"}, {"color": "darkblue", "id": "AUMEL", "label": "AUMEL", "shape": "dot"}, {"color": "darkblue", "id": "ESAXO", "label": "ESAXO", "shape": "dot"}, {"color": "darkblue", "id": "LBBEY", "label": "LBBEY", "shape": "dot"}, {"color": "darkblue", "id": "MYTPP", "label": "MYTPP", "shape": "dot"}, {"color": "darkblue", "id": "SAJED", "label": "SAJED", "shape": "dot"}, {"color": "darkblue", "id": "CLVAP", "label": "CLVAP", "shape": "dot"}, {"color": "darkblue", "id": "ILASH", "label": "ILASH", "shape": "dot"}, {"color": "darkblue", "id": "QAHMD", "label": "QAHMD", "shape": "dot"}, {"color": "darkblue", "id": "PAMIT", "label": "PAMIT", "shape": "dot"}, {"color": "darkblue", "id": "SIKOP", "label": "SIKOP", "shape": "dot"}, {"color": "darkblue", "id": "USCHI", "label": "USCHI", "shape": "dot"}, {"color": "darkblue", "id": "USORF", "label": "USORF", "shape": "dot"}, {"color": "darkblue", "id": "CYAKT", "label": "CYAKT", "shape": "dot"}, {"color": "darkblue", "id": "DEBRE", "label": "DEBRE", "shape": "dot"}, {"color": "darkblue", "id": "DEBRV", "label": "DEBRV", "shape": "dot"}, {"color": "darkblue", "id": "LYBEN", "label": "LYBEN", "shape": "dot"}, {"color": "darkblue", "id": "MQFDF", "label": "MQFDF", "shape": "dot"}, {"color": "darkblue", "id": "MTMAR", "label": "MTMAR", "shape": "dot"}, {"color": "darkblue", "id": "FRDKK", "label": "FRDKK", "shape": "dot"}, {"color": "darkblue", "id": "INCCU", "label": "INCCU", "shape": "dot"}, {"color": "darkblue", "id": "IQUQR", "label": "IQUQR", "shape": "dot"}, {"color": "darkblue", "id": "CNNSA", "label": "CNNSA", "shape": "dot"}, {"color": "darkblue", "id": "USEWR", "label": "USEWR", "shape": "dot"}, {"color": "darkblue", "id": "JOAQB", "label": "JOAQB", "shape": "dot"}, {"color": "darkblue", "id": "JOAQJ", "label": "JOAQJ", "shape": "dot"}, {"color": "darkblue", "id": "FRLEH", "label": "FRLEH", "shape": "dot"}, {"color": "darkblue", "id": "SGSIN", "label": "SGSIN", "shape": "dot"}, {"color": "darkblue", "id": "PGLAE", "label": "PGLAE", "shape": "dot"}, {"color": "darkblue", "id": "MXZLO", "label": "MXZLO", "shape": "dot"}, {"color": "darkblue", "id": "NLMOE", "label": "NLMOE", "shape": "dot"}, {"color": "darkblue", "id": "CAMTR", "label": "CAMTR", "shape": "dot"}, {"color": "darkblue", "id": "USSEA", "label": "USSEA", "shape": "dot"}, {"color": "darkblue", "id": "USGXX", "label": "USGXX", "shape": "dot"}, {"color": "darkblue", "id": "PKKHI", "label": "PKKHI", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "PFPPT", "to": "ESZJU"}, {"from": "NLRTM", "to": "CNYTN"}, {"from": "MYPKG", "to": "THLKR"}, {"from": "INNSA", "to": "IDJKT"}, {"from": "USMIA", "to": "BEANR"}, {"from": "KWSAA", "to": "AEJEA"}, {"from": "ESBCN", "to": "BRSSZ"}, {"from": "MXVER", "to": "ESGRO"}, {"from": "SGKEP", "to": "ESILL"}, {"from": "GRPIR", "to": "ESGRO"}, {"from": "MYPKG", "to": "THBKK"}, {"from": "BEANR", "to": "CMDLA"}, {"from": "CNNGB", "to": "CNTAO"}, {"from": "AUSYD", "to": "CNSHA"}, {"from": "USPHL", "to": "ECGYE"}, {"from": "DEHAM", "to": "CMDLA"}, {"from": "KRPUS", "to": "DEHAM"}, {"from": "OMSOH", "to": "MYPKG"}, {"from": "TRIST", "to": "FRFOS"}, {"from": "CNYTN", "to": "BEANR"}, {"from": "BEANR", "to": "INIXE"}, {"from": "EGPSE", "to": "AEJEA"}, {"from": "CNSHA", "to": "BEANR"}, {"from": "CNYTN", "to": "DEHAM"}, {"from": "CAVAN", "to": "BEANR"}, {"from": "USLGB", "to": "FRFOS"}, {"from": "NLRTM", "to": "THLKR"}, {"from": "CNSHA", "to": "ITRPP"}, {"from": "MYPGU", "to": "CMDLA"}, {"from": "USLAX", "to": "MYPKG"}, {"from": "DEHAM", "to": "THLCH"}, {"from": "USMIA", "to": "FRFOS"}, {"from": "USNYC", "to": "EGALY"}, {"from": "PHMNL", "to": "USNYC"}, {"from": "AUMEL", "to": "MYPKG"}, {"from": "BRSSZ", "to": "BEANR"}, {"from": "ESAXO", "to": "NOAAA"}, {"from": "LBBEY", "to": "AEJEA"}, {"from": "MYTPP", "to": "MMRGN"}, {"from": "SAJED", "to": "BEANR"}, {"from": "CLVAP", "to": "ESILL"}, {"from": "ILASH", "to": "BEANR"}, {"from": "USLAX", "to": "ITGOA"}, {"from": "USLGB", "to": "BEANR"}, {"from": "USNYC", "to": "BEANR"}, {"from": "USNYC", "to": "CMDLA"}, {"from": "USNYC", "to": "FRFOS"}, {"from": "VNSGN", "to": "BRSSZ"}, {"from": "THLKR", "to": "PHMNL"}, {"from": "SAJED", "to": "PTLEI"}, {"from": "QAHMD", "to": "MACAS"}, {"from": "NLRTM", "to": "USOAK"}, {"from": "PAMIT", "to": "FRFOS"}, {"from": "SIKOP", "to": "CNYTN"}, {"from": "SIKOP", "to": "MMRGN"}, {"from": "USCHI", "to": "EGALY"}, {"from": "AEJEA", "to": "MYSHA"}, {"from": "AUMEL", "to": "ESVLC"}, {"from": "USORF", "to": "FRFOS"}, {"from": "USORF", "to": "ITSIB"}, {"from": "BEANR", "to": "KEMBA"}, {"from": "CLVAP", "to": "ESGRO"}, {"from": "CYAKT", "to": "FRFOS"}, {"from": "DEBRE", "to": "VNSGN"}, {"from": "DEBRV", "to": "BRSSZ"}, {"from": "LYBEN", "to": "AEJEA"}, {"from": "MQFDF", "to": "BEANR"}, {"from": "MTMAR", "to": "MACAS"}, {"from": "ESBCN", "to": "ECGYE"}, {"from": "FRDKK", "to": "CIABJ"}, {"from": "GRPIR", "to": "FRFOS"}, {"from": "HKHKG", "to": "BEANR"}, {"from": "ILASH", "to": "ESGRO"}, {"from": "ILASH", "to": "FRFOS"}, {"from": "ILASH", "to": "ITRAN"}, {"from": "INCCU", "to": "AEJEA"}, {"from": "IQUQR", "to": "AEJEA"}, {"from": "AUSYD", "to": "MYPKG"}, {"from": "DEHAM", "to": "BRSSZ"}, {"from": "DEHAM", "to": "CIABJ"}, {"from": "DEHAM", "to": "EGALY"}, {"from": "CNSHA", "to": "FRFOS"}, {"from": "CAVAN", "to": "FRFOS"}, {"from": "CNNGB", "to": "FRFOS"}, {"from": "CNNSA", "to": "FRFOS"}, {"from": "USEWR", "to": "KEMBA"}, {"from": "USMIA", "to": "CNYTN"}, {"from": "USNYC", "to": "DEHAM"}, {"from": "USNYC", "to": "EGPSD"}, {"from": "ILASH", "to": "ITGOA"}, {"from": "KRPUS", "to": "THLKR"}, {"from": "JOAQB", "to": "EGPSE"}, {"from": "JOAQJ", "to": "EGALY"}, {"from": "KRPUS", "to": "BEANR"}, {"from": "ESBCN", "to": "BDCGP"}, {"from": "FRLEH", "to": "CMDLA"}, {"from": "SGSIN", "to": "AEJEA"}, {"from": "PGLAE", "to": "PHMNL"}, {"from": "QAHMD", "to": "ITADO"}, {"from": "LBBEY", "to": "ESILL"}, {"from": "NLRTM", "to": "CNSHA"}, {"from": "NLRTM", "to": "MACAS"}, {"from": "MXZLO", "to": "MYPGU"}, {"from": "NLMOE", "to": "KEMBA"}, {"from": "QAHMD", "to": "PHMNL"}, {"from": "THBKK", "to": "IDJKT"}, {"from": "USEWR", "to": "DJJIB"}, {"from": "DEHAM", "to": "ESGRO"}, {"from": "BDCGP", "to": "PHMNL"}, {"from": "CAMTR", "to": "GTPBR"}, {"from": "NLRTM", "to": "BRSSZ"}, {"from": "NLRTM", "to": "CIABJ"}, {"from": "USSEA", "to": "MYPKG"}, {"from": "BDCGP", "to": "PHBTG"}, {"from": "USGXX", "to": "HNPCR"}, {"from": "PKKHI", "to": "MYPGU"}, {"from": "USNYC", "to": "MYPKG"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "manipulation",
+            "layout",
+            "interaction"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
